@@ -54,6 +54,11 @@ webhooks:
     sideEffects: None
     admissionReviewVersions:
       - v1
+    namespaceSelector:
+      matchLabels:
+        {{- range $key, $value := .Values.webhook.namespaceSelector.matchLabels }}
+        {{ $key }}: {{ $value | quote }}
+        {{- end }}
     rules:
       - operations:
           - CREATE
